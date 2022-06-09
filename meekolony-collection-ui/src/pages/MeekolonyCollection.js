@@ -151,7 +151,7 @@ const MeekolonyCollection = () => {
     <div>
       <div className="flex flex-col justify-center items-center">
         <div className="w-3/5 pt-5">
-          <div className="text-white font-bold text-2xl">
+          <div className="text-white font-semibold text-2xl">
             Tatsumeeko: Meekolony Pass
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5 p-3">
@@ -172,12 +172,14 @@ const MeekolonyCollection = () => {
         </div>
       </div>
       <div>
-        <div className="text-white font-bold text-2xl">Meekolony Listings</div>
+        <div className="text-white font-semibold text-2xl">
+          Meekolony Listings
+        </div>
         <Table columns={listingsCol} data={listings} />
         <Pagination fetchData={fetchListings} />
       </div>
       <div>
-        <div className="text-white font-bold text-2xl">
+        <div className="text-white font-semibold text-2xl">
           Meekolony Activities
         </div>
         <Table columns={activitiesCol} data={activities} />

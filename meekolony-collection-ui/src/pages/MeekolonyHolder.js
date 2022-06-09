@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import TokenCard from "../components/holder/TokenCard";
-import TokenDialog from "../components/holder/TokenDialog";
 import { api } from "../utils/axios";
 import Spinner from "../utils/Spinner";
 
@@ -26,9 +25,8 @@ const MeekolonyHolder = () => {
         }
       }
     } catch (e) {
-      setError("Invalid wallet address.");
+      setError("Invalid wallet address or rpc server is busy.");
     }
-    console.log("hello2");
     setLoading(false);
   };
 

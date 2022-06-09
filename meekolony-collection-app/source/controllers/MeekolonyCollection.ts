@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import axios, { AxiosResponse } from "axios";
+import cmService from "../services/cmService";
 
 const symbol = "meekolony";
 
@@ -71,19 +72,6 @@ const getMeekolonyListings = async (
   });
 };
 
-const getMeekoName = async (mintAddr: String) => {
-  var config = {
-    method: "get",
-    url: `http://api-mainnet.magiceden.dev/v2/tokens/${mintAddr}`,
-    headers: {},
-  };
-  let result: AxiosResponse = await axios(config);
-  if (result.status === 200) {
-    return result.data.name;
-  }
-  return "";
-};
-
 const getMeekolonyActivities = async (
   req: Request,
   res: Response,
@@ -101,8 +89,28 @@ const getMeekolonyActivities = async (
   });
 };
 
+const getUniqueHolders = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const candyMachineId: any = process.env.CANDY_MACHINE_ID;
+    const data = await cmService.fetchHashTable(candyMachineId);
+    return res.status(200).json({
+      message: data,
+    });
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json({
+      message: [],
+    });
+  }
+};
+
 export default {
   getMeekolonyStats,
   getMeekolonyListings,
   getMeekolonyActivities,
+  getUniqueHolders,
 };

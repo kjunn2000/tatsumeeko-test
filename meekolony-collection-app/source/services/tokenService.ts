@@ -2,42 +2,49 @@ import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import axios from "axios";
 import { format, token } from "morgan";
 import { AccountLayout, TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js";
+import {
+  AccountInfo,
+  Connection,
+  PublicKey,
+  ParsedAccountData,
+} from "@solana/web3.js";
 
 const tokenService = {
-  getTokens: async (connection: Connection, pubKey: string) => {
-    const tokenAccounts = await connection.getTokenAccountsByOwner(
-      new PublicKey(pubKey),
-      {
-        programId: TOKEN_PROGRAM_ID,
-      }
-    );
-
-    console.log("Token                                         Balance");
-    console.log("------------------------------------------------------------");
-    let tokenList: string[] = [];
-    tokenAccounts.value.forEach((e) => {
-      const accountInfo = AccountLayout.decode(e.account.data);
-      if (accountInfo.owner.toString() === pubKey && accountInfo.amount > 0) {
-        tokenList.push(new PublicKey(accountInfo.mint).toString());
-        console.log(
-          `${new PublicKey(accountInfo.mint)}   ${accountInfo.amount}`
-        );
-      }
-    });
-    return tokenList;
+  getTokenAccounts: async (connection: Connection, pubKey: string) => {
+    let accounts: Array<{
+      pubkey: PublicKey;
+      account: AccountInfo<Buffer | ParsedAccountData>;
+    }> = [];
+    if (pubKey) {
+      accounts = await connection.getParsedProgramAccounts(TOKEN_PROGRAM_ID, {
+        filters: [
+          {
+            dataSize: 165,
+          },
+          {
+            memcmp: {
+              offset: 32,
+              bytes: pubKey,
+            },
+          },
+        ],
+      });
+    }
+    return accounts;
   },
 
-  getTokenData: async (connection: Connection, mintAddr: string) => {
+  getTokenData: async (connection: Connection, token: any) => {
     try {
-      let tokenmetaPubkey = await Metadata.getPDA(mintAddr);
-      let tokenData = await Metadata.load(connection, tokenmetaPubkey);
-      return tokenData;
+      if (token && token.mint) {
+        let mintPubkey = new PublicKey(token.mint);
+        let tokenmetaPubkey = await Metadata.getPDA(mintPubkey);
+        let tokenData = await Metadata.load(connection, tokenmetaPubkey);
+        return tokenData;
+      }
     } catch (error) {
       console.log(error);
     }
   },
-
   getMetaData: async (tokenData: any) => {
     let metaData = {};
     if (tokenData) {

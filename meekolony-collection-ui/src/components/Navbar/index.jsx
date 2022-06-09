@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 const Navbar = ({ navigationData, currentRoute, setCurrentRoute }) => {
   return (
     <nav className={styles.navbar}>
-      <span className="text-white text-2xl font-thin">Meekolony</span>
+      <span className="text-white text-2xl font-semibold text-yellow-300 italic">
+        Meekolony
+      </span>
       <ul className={styles.navItems}>
         {navigationData.map((item, index) => (
           <Link

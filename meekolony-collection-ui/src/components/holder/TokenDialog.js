@@ -3,7 +3,6 @@ import { Fragment, useRef } from "react";
 
 export default function TokenDialog({ isOpen, setIsOpen, token, buttonText }) {
   const cancelButtonRef = useRef();
-  console.log(token);
   function closeModal() {
     setIsOpen(false);
   }
