@@ -10,7 +10,7 @@ const TokenCard = ({ token }) => {
     >
       <div class="max-w-sm rounded overflow-hidden shadow-lg rounded bg-slate-200">
         <img
-          className="w-full h-96"
+          className="w-full h-full"
           src={token.image}
           alt="Sunset in the mountains"
         />

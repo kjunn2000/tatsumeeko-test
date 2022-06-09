@@ -28,11 +28,7 @@ const getTokens = async (req: Request, res: Response, next: NextFunction) => {
         (accountInfo: any) => accountInfo?.account?.data?.parsed?.info
       );
       let ownedTokens = tokenList.filter(
-        (token: any) =>
-          token.owner === pubKey && parseInt(token.tokenAmount?.amount) > 0
-      );
-      console.log(
-        `Found ${ownedTokens?.length} tokenData for pubKey ${pubKey}.`
+        (token: any) => token.owner === pubKey
       );
       let ownedTokenData: any = [];
       for (let token of ownedTokens) {
@@ -41,25 +37,17 @@ const getTokens = async (req: Request, res: Response, next: NextFunction) => {
           ownedTokenData.push(tokenData);
         }
       }
-      console.log(
-        `Found ${ownedTokenData?.length} tokenData for pubKey ${pubKey}.`
-      );
-
       for (let tokenData of ownedTokenData) {
         let metaData: any = await tokenService.getMetaData(tokenData);
         if (metaData && metaData?.symbol && metaData?.symbol === "MKLN") {
           metaDataList.push(metaData);
         }
       }
-      console.log(
-        `Found ${metaDataList?.length} metaData for pubKey ${pubKey}.`
-      );
     }
     return res.status(200).json({
       message: metaDataList,
     });
   } catch (e) {
-    console.log(e);
     return res.status(400).json({
       message: [],
     });

@@ -1,7 +1,6 @@
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import axios from "axios";
-import { format, token } from "morgan";
-import { AccountLayout, TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import {
   AccountInfo,
   Connection,
@@ -41,23 +40,18 @@ const tokenService = {
         let tokenData = await Metadata.load(connection, tokenmetaPubkey);
         return tokenData;
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   },
   getMetaData: async (tokenData: any) => {
     let metaData = {};
     if (tokenData) {
       let metaDataUri = tokenData.data?.data?.uri;
-      console.log(metaDataUri);
       try {
         const response: any = await axios.get(metaDataUri);
         if (response && response.data) {
           metaData = response.data;
         }
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     }
     return metaData;
   },

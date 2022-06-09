@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Button, PageButton } from "./Button";
+import React, { useState } from "react";
+import { PageButton } from "./Button";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 const Pagination = ({ fetchData }) => {

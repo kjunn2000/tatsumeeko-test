@@ -101,7 +101,6 @@ const getUniqueHolders = async (
       message: data,
     });
   } catch (e) {
-    console.log(e);
     return res.status(400).json({
       message: [],
     });

@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import classNames from "classnames";
-import { FiUsers } from "react-icons/fi";
-import { MdWork } from "react-icons/md";
+import { BsClipboardData } from "react-icons/bs";
+import { BiWallet } from "react-icons/bi";
 
 import styles from "./Tabbar.module.css";
 import { Link } from "react-router-dom";
@@ -10,9 +10,9 @@ const Tabbar = ({ navigationData, currentRoute, setCurrentRoute }) => {
   const getTabIcon = useCallback((item) => {
     switch (item) {
       case "Collection":
-        return <FiUsers />;
+        return <BsClipboardData />;
       case "Holder":
-        return <MdWork />;
+        return <BiWallet />;
     }
   }, []);
 

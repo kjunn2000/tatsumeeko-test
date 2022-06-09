@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTable, useSortBy } from "react-table";
 
 function Table({ columns, data }) {
@@ -23,12 +23,13 @@ function Table({ columns, data }) {
                 className="w-full divide-y divide-gray-200"
               >
                 <thead className="bg-gray-800 text-white">
-                  {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
-                      {headerGroup.headers.map((column) => (
+                  {headerGroups.map((headerGroup, i) => (
+                    <tr {...headerGroup.getHeaderGroupProps()} key={i}>
+                      {headerGroup.headers.map((column, i) => (
                         <th
                           scope="col"
                           className="group px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
+                          key={i}
                         >
                           <div className="flex items-center justify-between">
                             {column.render("Header")}
@@ -45,7 +46,7 @@ function Table({ columns, data }) {
                   {rows.map((row, i) => {
                     prepareRow(row);
                     return (
-                      <tr {...row.getRowProps()}>
+                      <tr {...row.getRowProps()} key={i}>
                         {row.cells.map((cell) => {
                           return (
                             <td

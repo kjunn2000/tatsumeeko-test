@@ -13,11 +13,13 @@ const MeekolonyCollection = () => {
   const [copiedSuccessOpen, setCopiedSuccessOpen] = useState(false);
   const [listingsEndOpen, setListingsEndOpen] = useState(false);
   const [activitiesEndOpen, setActivitiesEndOpen] = useState(false);
+  const [uniqueHolder, setUniHolder] = useState("-");
 
   useEffect(() => {
     fetchStatsData();
     fetchListings(0);
     fetchActivities(0);
+    fetchUniqueHolder();
   }, []);
 
   const fetchStatsData = async () => {
@@ -66,6 +68,13 @@ const MeekolonyCollection = () => {
       setActivities(res.data.message);
     } else {
       setListingsEndOpen(true);
+    }
+  };
+
+  const fetchUniqueHolder = async () => {
+    const res = await api.get("/meekolony/unique-holders");
+    if (res.status && res.status === 200) {
+      setUniHolder(res.data.message);
     }
   };
 
@@ -168,6 +177,7 @@ const MeekolonyCollection = () => {
               value={formatTwoDigits(stats.avgPrice24hr) + "◎"}
             />
             <StatsCard title="TOTAL LISTED COUNT" value={stats.listedCount} />
+            <StatsCard title="UNIQUE HOLDER" value={uniqueHolder} />
           </div>
         </div>
       </div>

@@ -56,7 +56,7 @@ const MeekolonyHolder = () => {
           ***Only for NFT amount larger than 0***
         </div>
       </div>
-      <div className="w-100 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center gap-5 p-5">
+      <div className="w-100 grid grid-cols-1 lg:grid-cols-3 justify-items-center gap-5 p-5">
         {tokens &&
           tokens.map((token) => <TokenCard key={token.name} token={token} />)}
       </div>
