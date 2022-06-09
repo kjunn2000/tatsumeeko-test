@@ -10,8 +10,11 @@ Mobile View
 ![image](https://user-images.githubusercontent.com/56694710/172903828-af2db86a-6a70-4c49-a292-e384af607232.png)
 
 ![image](https://user-images.githubusercontent.com/56694710/172903870-124583b2-dc3d-4a55-a2ec-061f6716a180.png)
+![image](https://user-images.githubusercontent.com/56694710/172904950-ddc0f3bc-00c5-412c-84fa-e9ade6201667.png)
 
 ![image](https://user-images.githubusercontent.com/56694710/172903944-5be3d5ab-9ffb-47bb-b3e1-b2389c340d5a.png)
+![image](https://user-images.githubusercontent.com/56694710/172904991-3de10f43-07fe-4ac9-871f-e3996edf694f.png)
+
 
 Meekolony Holder Page
 
